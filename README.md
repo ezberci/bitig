@@ -28,7 +28,7 @@ Bitig automatically ingests your work data (Gmail, Jira, Google Meet transcripts
 ### 1. Clone and configure
 
 ```bash
-git clone https://github.com/your-username/bitig.git
+git clone https://github.com/ezberci/bitig.git
 cd bitig
 cp .env.example .env
 # Edit .env with your API keys and configuration
@@ -118,6 +118,12 @@ ruff format src/ tests/
 # Run tests
 pytest
 ```
+
+## Documentation
+
+- [Architecture](docs/architecture.md) -- System design, data flow, module map
+- [Connectors](docs/connectors.md) -- Built-in connectors and how to add new ones
+- [Deployment](docs/deployment.md) -- Docker, local dev, API reference
 
 ## License
 
