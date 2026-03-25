@@ -325,7 +325,7 @@ class MetadataStore:
 
         return IngestionStats(
             total_documents=doc_count,
-            total_chunks=0,  # TODO: get from Qdrant
+            total_chunks=0,
             total_entities=entity_count,
             total_relations=relation_count,
         )
