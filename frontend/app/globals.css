@@ -1,0 +1,85 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    @apply bg-obsidian-950 text-sand-200 font-body antialiased;
+    background-image:
+      radial-gradient(ellipse at 20% 50%, rgba(212, 162, 84, 0.03) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 20%, rgba(212, 162, 84, 0.02) 0%, transparent 50%);
+  }
+
+  ::selection {
+    @apply bg-amber-500/30 text-sand-100;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-obsidian-900;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-obsidian-600 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-obsidian-500;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-obsidian-850 border border-obsidian-700/50 rounded-lg;
+  }
+
+  .card-hover {
+    @apply card transition-all duration-300 hover:border-amber-500/20 hover:shadow-lg hover:shadow-amber-500/5;
+  }
+
+  .btn-primary {
+    @apply px-4 py-2 bg-amber-500 text-obsidian-950 font-medium rounded-lg
+           transition-all duration-200 hover:bg-amber-400 active:scale-[0.98]
+           disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-amber-500;
+  }
+
+  .btn-ghost {
+    @apply px-4 py-2 text-sand-300 font-medium rounded-lg
+           transition-all duration-200 hover:bg-obsidian-700/50 hover:text-sand-100;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 bg-obsidian-800 border border-obsidian-600/50 rounded-lg
+           text-sand-100 placeholder:text-obsidian-500 font-body
+           focus:outline-none focus:border-amber-500/40 focus:ring-1 focus:ring-amber-500/20
+           transition-all duration-200;
+  }
+
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .glow-line {
+    @apply h-px bg-gradient-to-r from-transparent via-amber-500/30 to-transparent;
+  }
+}
+
+/* Subtle noise texture overlay */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.015;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
