@@ -1,19 +1,23 @@
 from fastapi import APIRouter, Depends
 
-from src.dependencies import get_metadata_store
+from src.dependencies import get_metadata_store, get_rag_pipeline
 from src.models.chat import ChatHistoryItem, ChatRequest, ChatResponse
+from src.rag.pipeline import RAGPipeline
 from src.store.metadata import MetadataStore
 
 router = APIRouter()
 
 
 @router.post("/chat", response_model=ChatResponse)
-async def chat(request: ChatRequest) -> ChatResponse:
+async def chat(
+    request: ChatRequest,
+    rag_pipeline: RAGPipeline = Depends(get_rag_pipeline),
+) -> ChatResponse:
     """Ask a question using RAG pipeline."""
-    # TODO: Implement RAG pipeline in Phase 3
-    return ChatResponse(
-        answer="RAG pipeline not yet implemented.",
-        sources=[],
+    return await rag_pipeline.ask(
+        question=request.question,
+        top_k=request.top_k,
+        source_filter=request.source_filter,
     )
 
 

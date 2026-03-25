@@ -7,6 +7,11 @@ from fastapi import FastAPI
 from src.api.router import api_router
 from src.config import settings
 from src.connectors import create_connectors
+from src.ingestion.embedder import Embedder
+from src.llm import create_llm
+from src.rag.generator import Generator
+from src.rag.pipeline import RAGPipeline
+from src.rag.retriever import Retriever
 from src.store.metadata import MetadataStore
 from src.store.qdrant import QdrantStore
 
@@ -29,6 +34,17 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
 
     # Initialize connectors
     app.state.connectors = create_connectors(settings)
+
+    # Initialize RAG pipeline
+    llm = create_llm(settings)
+    embedder = Embedder(model_name=settings.embedding_model)
+    retriever = Retriever(embedder=embedder, qdrant_store=qdrant_store)
+    generator = Generator(llm=llm)
+    app.state.rag_pipeline = RAGPipeline(
+        retriever=retriever,
+        generator=generator,
+        metadata_store=metadata_store,
+    )
 
     logger.info("bitig_ready")
     yield
