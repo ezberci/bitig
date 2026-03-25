@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# IDE / AI tooling
+.vscode/
+.idea/
+*.swp
+*.swo
+CLAUDE.md
+
+# Environment
+.env
+.env.local
+
+# Data
+data/
+*.db
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node (frontend)
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+
+# Docker
+docker-compose.override.yml
+
+# Credentials
+credentials/
+*.json
+!package.json
+!tsconfig.json
+!next.config.js
+!tailwind.config.js
