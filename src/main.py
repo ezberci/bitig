@@ -5,6 +5,8 @@ import structlog
 from fastapi import FastAPI
 
 from src.api.router import api_router
+from src.config import settings
+from src.connectors import create_connectors
 from src.store.metadata import MetadataStore
 from src.store.qdrant import QdrantStore
 
@@ -24,6 +26,9 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
     qdrant_store = QdrantStore()
     await qdrant_store.initialize()
     app.state.qdrant_store = qdrant_store
+
+    # Initialize connectors
+    app.state.connectors = create_connectors(settings)
 
     logger.info("bitig_ready")
     yield
